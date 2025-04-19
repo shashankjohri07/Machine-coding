@@ -1,35 +1,48 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from "react";
+import Navbar from "./components/Navbar";
+import Post from "./components/Post";
+
+// Static posts array
+const posts = [
+  {
+    id: 1,
+    caption: "Sunset vibes 🌅",
+    image: "/images/sunset.jpg",
+  },
+  {
+    id: 2,
+    caption: "Weekend chill 😎",
+    image: "/images/chill.jpg",
+  },
+];
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [likedPosts, setLikedPosts] = useState([]); // Track liked posts
+
+  const toggleLike = (id) => {
+    setLikedPosts((prevLikedPosts) => {
+      if (prevLikedPosts.includes(id)) {
+        return prevLikedPosts.filter((postId) => postId !== id); // Un-like
+      }
+      return [...prevLikedPosts, id]; // Like
+    });
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="bg-gray-100 min-h-screen">
+      <Navbar />
+      <div className="mt-6 flex flex-col gap-6 items-center">
+        {posts.map((post) => (
+          <Post
+            key={post.id}
+            post={post}
+            liked={likedPosts.includes(post.id)}
+            toggleLike={toggleLike}
+          />
+        ))}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;
