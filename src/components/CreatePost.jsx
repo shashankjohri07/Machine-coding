@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 function CreatePost({ addPost }) {
-  const [caption, setCaption] = useState('');
-  const [image, setImage] = useState('');
+  const [caption, setCaption] = useState("");
+  const [image, setImage] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!image || !caption) return;
     const newPost = { caption, image };
     addPost(newPost);
-    setCaption('');
-    setImage('');
+    setCaption("");
+    setImage("");
   };
 
   return (
