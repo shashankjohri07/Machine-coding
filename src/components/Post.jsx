@@ -9,7 +9,8 @@ function Post({ post, toggleLike }) {
         alt="post"
         className="w-full h-64 object-cover rounded-xl mb-4"
       />
-      <p className="text-gray-800 text-lg mb-4">{post.caption}</p>
+
+  
 
       <div className="flex items-center gap-6">
         <button
